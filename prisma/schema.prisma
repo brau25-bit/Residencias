@@ -1,0 +1,103 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  USER
+  ADMIN
+  TECHNICIAN
+}
+
+enum ReportStatus {
+  PENDING
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}
+
+enum ReportCategory {
+  ROAD_ISSUE
+  GRAFFITI
+  ILLEGAL_DUMPING
+  STREET_LIGHT_ISSUE
+  OTHER
+}
+
+model User {
+  id        String  @id @default(uuid())
+  email     String  @unique
+  password  String
+  name      String?
+  lastname  String?
+
+  role       Role    @default(USER)
+
+  isActive   Boolean @default(true)
+  verified   Boolean @default(false)
+  verifiedAt DateTime?
+
+  isBanned   Boolean @default(false)
+  bannedAt   DateTime?
+  banReason  String?
+
+  canReport  Boolean @default(true)
+  isDeleted  Boolean @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  reports              Report[]
+  reportStatusChanges  ReportStatusHistory[]
+}
+
+model Report {
+  id          String @id @default(uuid())
+  title       String
+  description String
+  category    ReportCategory @default(OTHER)
+
+  latitude  Float
+  longitude Float
+
+  status     ReportStatus @default(PENDING)
+  isVisible  Boolean      @default(true)
+  isDeleted  Boolean      @default(false)
+
+  userId  String
+  user    User @relation(fields: [userId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  history ReportStatusHistory[]
+
+  @@index([latitude, longitude])
+  @@index([status])
+  @@index([category])
+}
+
+model ReportStatusHistory {
+  id            String @id @default(uuid())
+
+  reportId      String
+  report        Report @relation(fields: [reportId], references: [id])
+
+  oldStatus     ReportStatus
+  newStatus     ReportStatus
+
+  changedById   String
+  changedBy     User @relation(fields: [changedById], references: [id])
+
+  changedAt     DateTime @default(now())
+}
