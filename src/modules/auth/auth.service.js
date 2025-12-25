@@ -130,12 +130,12 @@ export class AuthService{
             })
 
             if(!user) throw new Error("Credenciales invalidas")
-
             const verifiedAccount = await prisma.user.update({
                 where: {id: user.id},
                 data: {
                     verified: true,
                     verificationToken: null,
+                    verifiedAt: new Date(),
                     canReport: true
                 }
             })
