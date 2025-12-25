@@ -1,0 +1,37 @@
+POST http://localhost:3000/api/v1/auth/register
+Content-Type: application/json
+
+{
+    "email": "brauliochaveza@gmail.com",
+    "password": "123456",
+    "name": "diego",
+    "lastname": "chavez"
+}
+
+###
+POST http://localhost:3000/api/v1/auth/login
+Content-Type: application/json
+
+{
+    "email": "brauliochaveza@gmail.com",
+    "password": "654321"
+}
+
+###
+POST http://localhost:3000/api/v1/auth/verify-account?token=8dbdf3ffbe86ad77976fdf9882c45d44cb6a14915e8178dc62d085d05dcb1956
+
+###
+POST http://localhost:3000/api/v1/auth/recover-password
+Content-Type: application/json
+
+{
+    "email": "brauliochaveza@gmail.com"
+}
+
+###
+POST http://localhost:3000/api/v1/auth/reset-password?token=b75061eae49aac7683f48b405a87a252d66afaf6cdbeb1856a434869c117ba8a
+Content-Type: application/json
+
+{
+    "password": "654321"
+}

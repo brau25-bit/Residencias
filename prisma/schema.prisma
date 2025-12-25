@@ -11,6 +11,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
+  url      = env("DATABASE_URL")  // ✅ AGREGAR ESTA LÍNEA
 }
 
 enum Role {
@@ -46,12 +47,16 @@ model User {
   isActive   Boolean @default(true)
   verified   Boolean @default(false)
   verifiedAt DateTime?
+  verificationToken String? @unique
+
+  resetToken           String? @unique
+  resetPasswordExpires DateTime?
 
   isBanned   Boolean @default(false)
   bannedAt   DateTime?
   banReason  String?
 
-  canReport  Boolean @default(true)
+  canReport  Boolean @default(false)
   isDeleted  Boolean @default(false)
 
   createdAt DateTime @default(now())
