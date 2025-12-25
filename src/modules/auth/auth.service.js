@@ -135,7 +135,8 @@ export class AuthService{
                 where: {id: user.id},
                 data: {
                     verified: true,
-                    verificationToken: null
+                    verificationToken: null,
+                    canReport: true
                 }
             })
 
