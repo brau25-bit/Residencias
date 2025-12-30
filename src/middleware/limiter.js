@@ -3,7 +3,7 @@ import {rateLimit} from 'express-rate-limit'
 
 export const limiter = rateLimit({
     windowMs: 15 * 60 * 1000,
-    limit: 100,
+    limit: 20,
     message: 'Demasiadas solicitudes, intenta más tarde',
     standardHeaders: 'draft-8',
     legacyHeaders: false,

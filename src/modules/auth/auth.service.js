@@ -18,7 +18,8 @@ export class AuthService{
 
         const token = jwtService.sign({
             id: user.id,
-            role: user.role
+            role: user.role,
+            canReport: user.canReport
         })
 
         return{
@@ -52,7 +53,7 @@ export class AuthService{
 
             if(!result) throw new Error("Fallo al registrar usuario");
             
-            const verificationEmail = await emailService(newuser.email, verificationToken)
+            await emailService(newuser.email, verificationToken)
 
             return { message: "Usuario registrado correctamente" }
         } catch (error) {

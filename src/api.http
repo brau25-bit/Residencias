@@ -2,7 +2,7 @@ POST http://localhost:3000/api/v1/auth/register
 Content-Type: application/json
 
 {
-    "email": "brauliochaveza@gmail.com",
+    "email": "brauliochavez2509@gmail.com",
     "password": "123456",
     "name": "braulio",
     "lastname": "chavez"
@@ -18,7 +18,7 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:3000/api/v1/auth/verify-account?token=8dbdf3ffbe86ad77976fdf9882c45d44cb6a14915e8178dc62d085d05dcb1956
+POST http://localhost:3000/api/v1/auth/verify-account?token=f0478dbf4c90cbd211f9f51d4b5529b16b3ef3d38377877baa528e4bc9170c19
 
 ###
 POST http://localhost:3000/api/v1/auth/recover-password
@@ -34,4 +34,17 @@ Content-Type: application/json
 
 {
     "password": "654321"
+}
+
+### ---------------------------------REPORTS ---------------------------------
+POST http://localhost:3000/api/v1/reports
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImM5ZDY1YzhmLWMxODEtNDYzYi05YTg1LTU1YWFiOTFkMzJmMyIsInJvbGUiOiJVU0VSIiwiY2FuUmVwb3J0Ijp0cnVlLCJpYXQiOjE3NjcwNjMwMzMsImV4cCI6MTc2NzE0OTQzM30.G0as2SCX5wgX4FsISvTqMYPYwSGXsr9OhC_Zl1JCmHU
+
+{
+    "title": "Reporte de baches ",
+    "description": "Reporte detallado de problemas viales en la zona",
+    "category": "OTHER",
+    "latitude": 19.4326,
+    "longitude": -99.1332
 }
