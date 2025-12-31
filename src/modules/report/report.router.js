@@ -11,7 +11,11 @@ const reportRouter = Router()
 reportRouter.get('/', verifyToken, ReportController.getReports)
 reportRouter.get('/:id', verifyToken, ReportController.getReportsByID)
 
-reportRouter.patch('/:id', verifyToken, authorization('USER'), validateSchema(partialReportSchema), ReportController.updateReports)
+reportRouter.patch('/:id', limiter, verifyToken, authorization('USER'), validateSchema(partialReportSchema), ReportController.updateReports)
+
+reportRouter.patch('/:id/delete', verifyToken, authorization('USER', 'ADMIN'), ReportController.deleteReports)
+
+reportRouter.patch('/:id/status', verifyToken, authorization('ADMIN'), validateSchema(partialReportSchema), ReportController.updateReportsStatus)
 
 reportRouter.post('/', limiter, verifyToken, authorization('USER'), validateSchema(reportSchema), ReportController.createReports)
 
@@ -19,9 +23,8 @@ reportRouter.post('/', limiter, verifyToken, authorization('USER'), validateSche
 
 // gestion de estados - historial de los reportes
 reportRouter.get('/:id/history')
-reportRouter.patch('/:id/status')
 
-reportRouter.delete('/:id')
+
 */
 
 export default reportRouter

@@ -140,6 +140,12 @@ export class ReportService{
         try {
             if(!id) throw new Error("Credenciales incorrectas")
 
+            const exists = await prisma.report.findUnique({
+                where: {id: id}
+            })
+
+            if(exists.length === 0) throw new Error("Datos incorrectos")
+
             const report = await prisma.report.update({
                 where: {id: id},
                 data: data
@@ -152,18 +158,58 @@ export class ReportService{
         }
     }
 
-    static async updateReportsStatus(){
+    static async updateReportsStatus({id, data, userId}){
         try {
+            if(!id || !data) throw new Error("Datos invalidos")
+
+            const exists = await prisma.report.findUnique({
+                where: {id: id}
+            })
+
+            if(!exists) throw new Error("No encontrado");
+
+            const oldStatus = exists.status
             
+            const [report, history] = await prisma.$transaction([
+                prisma.report.update({
+                    where: {id: id},
+                    data: data
+                }),
+                prisma.history.update({
+                    data: {
+                        reportId: id,
+                        oldStatus: oldStatus,
+                        newStatus: data.status,
+                        changedById: userId
+                    }
+                })
+            ])
+
+            return {
+                report,
+                history
+            }
         } catch (error) {
             console.error("Error creating report:", error)
             throw error
         }
     }
 
-    static async deleteReports(){
+    static async deleteReports({id}){
         try {
+            if(!id) throw new Error("Datos incorrectos")
+
+            const data = {
+                isVisible: false,
+                isDeleted: true
+            }
             
+            const result = await prisma.report.update({
+                where: {id: id},
+                data: data
+            })
+
+            return result
         } catch (error) {
             console.error("Error creating report:", error)
             throw error

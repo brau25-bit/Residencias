@@ -89,7 +89,15 @@ export class ReportController{
 
     static async updateReportsStatus(req, res){
         try {
-            
+            const {id} = req.params
+            const data = req.validated
+
+            const result = await ReportService.updateReportsStatus({id, data, userId: req.user.id})
+
+            return res.status(200).json({
+                message: "Estatus actualizado correctamente",
+                result
+            })
         } catch (error) {
             
         }
@@ -97,9 +105,16 @@ export class ReportController{
 
     static async deleteReports(req, res){
         try {
-            
+            const {id} = req.params
+
+            const result = await ReportService.deleteReports({id})
+
+            return res.status(200).json({
+                message: "Reporte eliminado",
+                result
+            })
         } catch (error) {
-            
+            res.status(404).json({message: error.message})
         }
     }
 }
