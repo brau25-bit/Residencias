@@ -8,20 +8,19 @@ import { authorization } from "../../middleware/authorize.js"
 
 const reportRouter = Router()
 
-reportRouter.get('/')
+reportRouter.get('/', verifyToken, ReportController.getReports)
+reportRouter.get('/:id', verifyToken, ReportController.getReportsByID)
 
+reportRouter.patch('/:id', verifyToken, authorization('USER'), validateSchema(partialReportSchema), ReportController.updateReports)
 
 reportRouter.post('/', limiter, verifyToken, authorization('USER'), validateSchema(reportSchema), ReportController.createReports)
 
 /*
 
-reportRouter.get('/:id')
-
 // gestion de estados - historial de los reportes
 reportRouter.get('/:id/history')
 reportRouter.patch('/:id/status')
 
-reportRouter.patch('/:id')
 reportRouter.delete('/:id')
 */
 

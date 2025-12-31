@@ -21,25 +21,45 @@ export class ReportController{
         try {
             const page = Number(req.query.page) || 1
             const limit = Number(req.query.limit) || 10
+            const userId = req.user.id
+            const role = req.user.role
 
             const {category, latitude, longitude, status} = req.query
 
-            const result = await ReportService.getReports({page, limit, category, latitude, longitude, status})
+            const result = await ReportService.getReports({
+                page, 
+                limit, 
+                category, 
+                latitude, 
+                longitude, 
+                status, 
+                userId,
+                role
+            })
 
             return res.status(200).json({
                 message: 'Reportes obtenidos',
                 result
             })
         } catch (error) {
-            
+            return res.status(400).json({ message: error.message })
         }
     }
 
     static async getReportsByID(req, res){
         try {
-            
+            const {id} = req.params
+
+            console.log(id)
+
+            const result = await ReportService.getReportsByID({id})
+
+            return res.status(200).json({
+                message: 'Reportes obtenidos',
+                result
+            })            
         } catch (error) {
-            
+            return res.status(400).json({ message: error.message })
         }
     }
 
@@ -53,9 +73,17 @@ export class ReportController{
 
     static async updateReports(req, res){
         try {
-            
+            const {id} = req.params
+            const data = req.validated
+
+            const result = await ReportService.updateReports({id, data})
+
+            return res.status(200).json({
+                message: "Reporte actualizado correctamente",
+                result
+            })
         } catch (error) {
-            
+            return res.status(304).json({ message: error.message })
         }
     }
 

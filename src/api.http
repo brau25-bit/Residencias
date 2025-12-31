@@ -39,12 +39,36 @@ Content-Type: application/json
 ### ---------------------------------REPORTS ---------------------------------
 POST http://localhost:3000/api/v1/reports
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImM5ZDY1YzhmLWMxODEtNDYzYi05YTg1LTU1YWFiOTFkMzJmMyIsInJvbGUiOiJVU0VSIiwiY2FuUmVwb3J0Ijp0cnVlLCJpYXQiOjE3NjcwNjMwMzMsImV4cCI6MTc2NzE0OTQzM30.G0as2SCX5wgX4FsISvTqMYPYwSGXsr9OhC_Zl1JCmHU
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImUxZWM1YjRjLWYwMTEtNGFhZC04MWY1LTAzNDdlOWQ3NDVlOCIsInJvbGUiOiJVU0VSIiwiY2FuUmVwb3J0Ijp0cnVlLCJpYXQiOjE3NjcyMTY4MDQsImV4cCI6MTc2NzMwMzIwNH0.OL_a3ntBHENOUu-jqj2V6e2K1lNkFKBPwwZmX_gvR-w
 
 {
-    "title": "Reporte de baches ",
-    "description": "Reporte detallado de problemas viales en la zona",
+    "title": "Reporte de problemas de basura",
+    "description": "Reporte detallado de problemas visualizados en la zona.",
     "category": "OTHER",
     "latitude": 19.4326,
     "longitude": -99.1332
+}
+
+###
+GET http://localhost:3000/api/v1/reports
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjE3NmRhMjZiLWUyZDQtNDE5ZS05ZjIzLTA3OTM3ZWI1NTM2MyIsInJvbGUiOiJBRE1JTiIsImNhblJlcG9ydCI6dHJ1ZSwiaWF0IjoxNzY3MjE2OTE5LCJleHAiOjE3NjczMDMzMTl9.fv2DnRPQFJ2LiLUv-FL06lNg9MPP2bLVL7QjLlnsliM
+
+###
+GET http://localhost:3000/api/v1/reports?category=OTHER
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImM5ZDY1YzhmLWMxODEtNDYzYi05YTg1LTU1YWFiOTFkMzJmMyIsInJvbGUiOiJVU0VSIiwiY2FuUmVwb3J0Ijp0cnVlLCJpYXQiOjE3NjcyMTMxNjEsImV4cCI6MTc2NzI5OTU2MX0.2h3UfWAbboZIsqwhJlvwbhcADw1Hjx8eV1AxvRXq0wc
+
+###
+GET http://localhost:3000/api/v1/reports/92dda4e6-4cef-425c-a3d4-4c26f829cea6
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImM5ZDY1YzhmLWMxODEtNDYzYi05YTg1LTU1YWFiOTFkMzJmMyIsInJvbGUiOiJVU0VSIiwiY2FuUmVwb3J0Ijp0cnVlLCJpYXQiOjE3NjcyMTMxNjEsImV4cCI6MTc2NzI5OTU2MX0.2h3UfWAbboZIsqwhJlvwbhcADw1Hjx8eV1AxvRXq0wc
+
+###
+PATCH http://localhost:3000/api/v1/reports/0992f942-4022-439c-ad28-2114eae3e328
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImM5ZDY1YzhmLWMxODEtNDYzYi05YTg1LTU1YWFiOTFkMzJmMyIsInJvbGUiOiJVU0VSIiwiY2FuUmVwb3J0Ijp0cnVlLCJpYXQiOjE3NjcyMTc3OTIsImV4cCI6MTc2NzMwNDE5Mn0.ppVmIaLjDNqlGmzm_X4KY85Bu6_TIlJyUgXDtsQ8EGk
+
+{
+    "title": "Reporte actualizado de problemas de basura",
+    "description": "Descripción actualizada del reporte detallado de problemas visualizados en la zona.",
+    "latitude": 19.4327,
+    "longitude": -99.1333
 }

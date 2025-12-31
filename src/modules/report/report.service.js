@@ -31,9 +31,13 @@ export class ReportService{
         }
     }
 
-    static async getReports({page, limit, category, latitude, longitude, status}){
+    static async getReports({
+        page, limit, category, latitude, longitude, status, userId, role
+    }){
         try {
             const filters = {}
+
+            if(role === 'USER') filters.userId = userId
 
             if(category) filters.category = category
             if(status) filters.status = status
@@ -54,19 +58,40 @@ export class ReportService{
                 }
             }
 
-            const reports = await prisma.reports.findMany({
+            filters.isDeleted = false
+            filters.isVisible = true
+
+            const total = await prisma.report.count({
+                where: filters
+            })
+
+            const reports = await prisma.report.findMany({
                 where: filters,
                 skip: (page - 1) * limit,
                 take: limit,
-                orderBy: { createdAt: 'desc' }
+                orderBy: { createdAt: 'desc' },
+                include: {
+                    user: {
+                        select: {
+                            id: true,
+                            name: true,
+                            lastname: true,
+                            email: true
+                        }
+                    }
+                }
             })
 
             if(reports.length === 0) throw new Error("Sin resultados")
 
             return {
                 data: reports,
-                page: page,
-                limit: limit
+                pagination: {
+                    page: page,
+                    limit: limit,
+                    total: total,
+                    totalPages: Math.ceil(total / limit)
+                }
             }
         } catch (error) {
             console.error("Error creating report:", error)
@@ -74,11 +99,31 @@ export class ReportService{
         }
     }
 
-    static async getReportsByID(){
+    static async getReportsByID({id}){
         try {
-            
+            if(!id) throw new Error("Id de reporte no proporcionado")
+
+            const report = await prisma.report.findUnique({
+                where: {id: id},
+                include: {
+                    user: {
+                        select: {
+                            id: true,
+                            name: true,
+                            lastname: true,
+                        }
+                    }
+                }
+            })
+
+            if(!report) throw new Error("No fue encontrado")
+
+            if(report.isDeleted || !report.isVisible) throw new Error("No fue encontrado")
+
+            return report
         } catch (error) {
-            
+            console.error("Error creating report:", error)
+            throw error
         }
     }
 
@@ -86,15 +131,24 @@ export class ReportService{
         try {
             
         } catch (error) {
-            
+            console.error("Error creating report:", error)
+            throw error
         }
     }
 
-    static async updateReports(){
+    static async updateReports({id, data}){
         try {
-            
+            if(!id) throw new Error("Credenciales incorrectas")
+
+            const report = await prisma.report.update({
+                where: {id: id},
+                data: data
+            })
+
+            return report
         } catch (error) {
-            
+            console.error("Error creating report:", error)
+            throw error
         }
     }
 
@@ -102,7 +156,8 @@ export class ReportService{
         try {
             
         } catch (error) {
-            
+            console.error("Error creating report:", error)
+            throw error
         }
     }
 
@@ -110,7 +165,8 @@ export class ReportService{
         try {
             
         } catch (error) {
-            
+            console.error("Error creating report:", error)
+            throw error
         }
     }
 }
