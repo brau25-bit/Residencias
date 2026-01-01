@@ -95,10 +95,31 @@ GET http://localhost:3000/api/v1/users?isActive=true&role=USER
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImM5ZDY1YzhmLWMxODEtNDYzYi05YTg1LTU1YWFiOTFkMzJmMyIsInJvbGUiOiJBRE1JTiIsImNhblJlcG9ydCI6dHJ1ZSwiaWF0IjoxNzY3MjQwMzA3LCJleHAiOjE3NjczMjY3MDd9.YBCNKrVifz_n1KESFKbY3guQP6CbjeoibJnn0KPwDWU
 
 ###
-GET http://localhost:3000/api/v1/users/176da26b-e2d4-419e-9f23-07937eb55363
+GET http://localhost:3000/api/v1/users/e1ec5b4c-f011-4aad-81f5-0347e9d745e8
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImM5ZDY1YzhmLWMxODEtNDYzYi05YTg1LTU1YWFiOTFkMzJmMyIsInJvbGUiOiJBRE1JTiIsImNhblJlcG9ydCI6dHJ1ZSwiaWF0IjoxNzY3MjQwMzA3LCJleHAiOjE3NjczMjY3MDd9.YBCNKrVifz_n1KESFKbY3guQP6CbjeoibJnn0KPwDWU
 
 ###
-PATCH http://localhost:3000/api/v1/users/176da26b-e2d4-419e-9f23-07937eb55363/ban
+PATCH http://localhost:3000/api/v1/users/e1ec5b4c-f011-4aad-81f5-0347e9d745e8/ban
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImM5ZDY1YzhmLWMxODEtNDYzYi05YTg1LTU1YWFiOTFkMzJmMyIsInJvbGUiOiJBRE1JTiIsImNhblJlcG9ydCI6dHJ1ZSwiaWF0IjoxNzY3MjkxNDI5LCJleHAiOjE3NjczNzc4Mjl9.2icUV2qsFW4YphTpdnSItBeEijOljYOSU3anx1O-yis
+
+{
+    "banReason": "Violación de las normas de la comunidad."
+}
+
+###
+PATCH http://localhost:3000/api/v1/users/e1ec5b4c-f011-4aad-81f5-0347e9d745e8/unban
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImM5ZDY1YzhmLWMxODEtNDYzYi05YTg1LTU1YWFiOTFkMzJmMyIsInJvbGUiOiJBRE1JTiIsImNhblJlcG9ydCI6dHJ1ZSwiaWF0IjoxNzY3MjkxNDI5LCJleHAiOjE3NjczNzc4Mjl9.2icUV2qsFW4YphTpdnSItBeEijOljYOSU3anx1O-yis
+
+###
+PATCH http://localhost:3000/api/v1/users/e1ec5b4c-f011-4aad-81f5-0347e9d745e8/toggle-report
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImM5ZDY1YzhmLWMxODEtNDYzYi05YTg1LTU1YWFiOTFkMzJmMyIsInJvbGUiOiJBRE1JTiIsImNhblJlcG9ydCI6dHJ1ZSwiaWF0IjoxNzY3MjkxNDI5LCJleHAiOjE3NjczNzc4Mjl9.2icUV2qsFW4YphTpdnSItBeEijOljYOSU3anx1O-yis
+
+### 
+PATCH http://localhost:3000/api/v1/users/e1ec5b4c-f011-4aad-81f5-0347e9d745e8/role
+Content-Type: application/json  
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImM5ZDY1YzhmLWMxODEtNDYzYi05YTg1LTU1YWFiOTFkMzJmMyIsInJvbGUiOiJBRE1JTiIsImNhblJlcG9ydCI6dHJ1ZSwiaWF0IjoxNzY3Mjk0NjQ5LCJleHAiOjE3NjczODEwNDl9.5urqNkvxzSNmPANyP8rtfScZLeL8VW1OW_R5qyj5Swo
+
+{
+    "role": "ADMIN"
+}

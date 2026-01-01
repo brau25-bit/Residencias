@@ -205,7 +205,7 @@ export class UserService{
         try {
             if(!id || !role) throw new Error("Datos no proporcionados")
 
-            const user = await prisma.user.find({
+            const user = await prisma.user.findUnique({
                 where: {id: id}
             })
 
@@ -216,6 +216,14 @@ export class UserService{
                 where: {id: id},
                 data: {
                     role: role
+                },
+                select: {
+                    id: true,
+                    name: true,
+                    lastname: true,
+                    email: true,
+                    verified: true,
+                    role: true
                 }
             })
 
