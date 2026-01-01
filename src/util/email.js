@@ -135,3 +135,65 @@ export async function passwordService(email, token){
         throw error; 
     }
 }
+
+export async function notificationService({
+  email,
+  title,
+  oldStatus,
+  newStatus,
+}) {
+  try {
+    const result = await resend.emails.send({
+      from: process.env.EMAIL_FROM,
+      to: email,
+      subject: 'Actualización de reporte - Sistema de Reportes Ciudadanos',
+      html: `
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <style>
+            body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+            .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+            .header { background-color: #1e3a8a; color: white; padding: 20px; text-align: center; }
+            .content { background-color: #f9fafb; padding: 30px; border: 1px solid #e5e7eb; }
+            .status-box { background: #eef2ff; padding: 15px; border-left: 4px solid #1e3a8a; margin: 20px 0; }
+            .footer { font-size: 12px; color: #6b7280; margin-top: 20px; padding-top: 20px; border-top: 1px solid #e5e7eb; }
+          </style>
+        </head>
+        <body>
+          <div class="container">
+            <div class="header">
+              <h2>Sistema de Reportes Ciudadanos</h2>
+            </div>
+
+            <div class="content">
+              <p>Estimado/a ciudadano/a,</p>
+
+              <p>Le informamos que el estado de su reporte ha sido actualizado.</p>
+
+              <div class="status-box">
+                <p><strong>Reporte:</strong> ${title}</p>
+                <p><strong>Estado anterior:</strong> ${oldStatus}</p>
+                <p><strong>Estado actual:</strong> ${newStatus}</p>
+              </div>
+
+              <p>Puede consultar el seguimiento de su reporte accediendo al sistema.</p>
+
+              <div class="footer">
+                <p>Este es un correo automático, por favor no responda a este mensaje.</p>
+                <p>Sistema de Reportes Ciudadanos</p>
+                <p>© ${new Date().getFullYear()} Todos los derechos reservados</p>
+              </div>
+            </div>
+          </div>
+        </body>
+        </html>
+      `
+    })
+
+    return result
+  } catch (error) {
+    console.error("Error in notification email service:", error)
+    throw error
+  }
+}

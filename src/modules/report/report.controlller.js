@@ -101,7 +101,7 @@ export class ReportController{
             console.log("id: " + id)
             console.log("status: " + status)
 
-            const result = await ReportService.updateReportsStatus({
+            const result = await ReportService.updateReportStatus({
                 id, 
                 status, 
                 userId: req.user.id})

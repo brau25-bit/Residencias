@@ -1,4 +1,5 @@
 import prisma from "../../db/client.js";
+import { notificationService } from "../../util/email.js";
 
 export class ReportService{
     static async createReports( data, userId ){
@@ -193,11 +194,22 @@ export class ReportService{
             if(!id || !status) throw new Error("Datos invalidos")
 
             const report = await prisma.report.findUnique({
-                where: {id: id}
+                where: {id: id},
+                select: {
+                    id: true,
+                    title: true,
+                    status: true,
+                    user: {
+                        select: {
+                            email: true
+                        }
+                    }
+                }
             })
 
             if(!report) throw new Error("No encontrado");
 
+            const title = report.title
             const oldStatus = report.status
             const newStatus = status
 
@@ -219,6 +231,8 @@ export class ReportService{
                         changedById: userId
                     }
             })
+
+            await notificationService({email: report.user.email, title, oldStatus, newStatus})
 
             return { updatedReport, history }
         })
