@@ -12,7 +12,9 @@ usersRouter.get('/', limiter, verifyToken, authorization('ADMIN'), UserControlle
 
 usersRouter.get('/:id', limiter, verifyToken, authorization('ADMIN'), UserController.getUserById)
 
-usersRouter.patch('/:id/ban',  limiter, verifyToken, authorization('ADMIN'), UserController.banUser)
+usersRouter.patch('/:id/ban',  limiter, verifyToken, authorization('ADMIN'), validateSchema(partialUserSchema), UserController.banUser)
+
+usersRouter.patch('/:id/unban',  limiter, verifyToken, authorization('ADMIN'), UserController.unbanUser)
 
 usersRouter.patch('/:id/toggle-report',  limiter, verifyToken, authorization('ADMIN'), UserController.toggleReportUser)
 

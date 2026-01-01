@@ -20,6 +20,11 @@ export const userSchema = z.object({
 
     role: z.enum(["USER", "ADMIN", "TECHNICIAN"])
     .optional(),
+
+    banReason: z.string()
+    .min(3, "razon demasiado corta")
+    .max(500, "razon demasiado larga")
+    .optional()
 })
 
 export const partialUserSchema = userSchema.partial()
