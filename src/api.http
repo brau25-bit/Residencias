@@ -13,8 +13,8 @@ POST http://localhost:3000/api/v1/auth/login
 Content-Type: application/json
 
 {
-    "email": "brauliochaveza@gmail.com",
-    "password": "123456"
+    "email": "user10@test.com",
+    "password": "password123"
 }
 
 ###
@@ -51,11 +51,11 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjE3NmRhMjZiL
 
 ###
 GET http://localhost:3000/api/v1/reports
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImM5ZDY1YzhmLWMxODEtNDYzYi05YTg1LTU1YWFiOTFkMzJmMyIsInJvbGUiOiJBRE1JTiIsImNhblJlcG9ydCI6dHJ1ZSwiaWF0IjoxNzY3MjQ3NTE0LCJleHAiOjE3NjczMzM5MTR9.FR1SRB_R-m8HIhSvRNJF8WMielpIlP8miqbkUy_pzOc
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjViMTRlZWU2LTdjMjYtNGVlZi1iZjNmLTlkMjIyYmQ3NDE2NiIsInJvbGUiOiJVU0VSIiwiY2FuUmVwb3J0Ijp0cnVlLCJpYXQiOjE3NjcyOTk1NTAsImV4cCI6MTc2NzM4NTk1MH0.46RD065UD2gwkQjc_T6jqc_Ol-uMav4RDliMHZS4L1k
 
 ###
-GET http://localhost:3000/api/v1/reports?category=OTHER
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImM5ZDY1YzhmLWMxODEtNDYzYi05YTg1LTU1YWFiOTFkMzJmMyIsInJvbGUiOiJVU0VSIiwiY2FuUmVwb3J0Ijp0cnVlLCJpYXQiOjE3NjcyMTMxNjEsImV4cCI6MTc2NzI5OTU2MX0.2h3UfWAbboZIsqwhJlvwbhcADw1Hjx8eV1AxvRXq0wc
+GET http://localhost:3000/api/v1/reports?status=COMPLETED
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjViMTRlZWU2LTdjMjYtNGVlZi1iZjNmLTlkMjIyYmQ3NDE2NiIsInJvbGUiOiJVU0VSIiwiY2FuUmVwb3J0Ijp0cnVlLCJpYXQiOjE3NjcyOTk1NTAsImV4cCI6MTc2NzM4NTk1MH0.46RD065UD2gwkQjc_T6jqc_Ol-uMav4RDliMHZS4L1k
 
 ###
 GET http://localhost:3000/api/v1/reports/fe75c9d7-6dfa-46b9-a847-b194bd9cc1c8
