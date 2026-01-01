@@ -25,7 +25,14 @@ export const reportSchema = z.object({
 
     longitude: z.number()
         .min(-180, "Longitud debe estar entre -180 y 180")
-        .max(180, "Longitud debe estar entre -180 y 180")
+        .max(180, "Longitud debe estar entre -180 y 180"),
+
+        status: z.enum([
+        'PENDING', 
+        'IN_PROGRESS', 
+        'COMPLETED', 
+        'CANCELLED'
+    ]),
 })
 
 export const partialReportSchema = reportSchema.partial()

@@ -65,9 +65,15 @@ export class ReportController{
 
     static async getReportsHistory(req, res){
         try {
-            
+            const {id} = req.params 
+            const result = await ReportService.getReportsHistory({id: id})
+
+            return res.status(200).json({
+                message: "Historial obtenido exitosamente",
+                result
+            })
         } catch (error) {
-            
+            return res.status(400).json({ message: error.message })
         }
     }
 
@@ -87,19 +93,25 @@ export class ReportController{
         }
     }
 
-    static async updateReportsStatus(req, res){
+    static async updateReportStatus(req, res){
         try {
             const {id} = req.params
-            const data = req.validated
+            const {status} = req.validated
 
-            const result = await ReportService.updateReportsStatus({id, data, userId: req.user.id})
+            console.log("id: " + id)
+            console.log("status: " + status)
+
+            const result = await ReportService.updateReportsStatus({
+                id, 
+                status, 
+                userId: req.user.id})
 
             return res.status(200).json({
                 message: "Estatus actualizado correctamente",
                 result
             })
         } catch (error) {
-            
+            res.status(400).json({message: "error:" + error})
         }
     }
 

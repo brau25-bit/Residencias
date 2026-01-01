@@ -127,9 +127,39 @@ export class ReportService{
         }
     }
 
-    static async getReportsHistory(){
+    static async getReportsHistory({id}){
         try {
-            
+            if(!id) throw new Error('ID de reporte no proporcionado')
+
+            const report = await prisma.report.findUnique({
+                where: {id: id},
+                select: {
+                    id: true,
+                    isDeleted: true
+                }
+            })
+
+            if(!report) throw new Error('Reporte no existe')
+            if(report.isDeleted) throw new Error('Reporte no existe')
+
+            const reportHistory = await prisma.reportStatusHistory.findMany({
+                where: {reportId: id},
+                include: {
+                    changedBy: {
+                        select: {
+                            id: true,
+                            name: true,
+                            lastname: true,
+                            email: true
+                        }
+                    }
+                },
+                orderBy: {
+                    changedAt: 'desc'
+                }
+            })
+
+            return reportHistory
         } catch (error) {
             console.error("Error creating report:", error)
             throw error
@@ -158,37 +188,42 @@ export class ReportService{
         }
     }
 
-    static async updateReportsStatus({id, data, userId}){
+    static async updateReportStatus({id, status, userId}){
         try {
-            if(!id || !data) throw new Error("Datos invalidos")
+            if(!id || !status) throw new Error("Datos invalidos")
 
-            const exists = await prisma.report.findUnique({
+            const report = await prisma.report.findUnique({
                 where: {id: id}
             })
 
-            if(!exists) throw new Error("No encontrado");
+            if(!report) throw new Error("No encontrado");
 
-            const oldStatus = exists.status
-            
-            const [report, history] = await prisma.$transaction([
-                prisma.report.update({
-                    where: {id: id},
-                    data: data
-                }),
-                prisma.history.update({
+            const oldStatus = report.status
+            const newStatus = status
+
+            if(oldStatus === newStatus) {
+                throw new Error("El reporte ya tiene ese estado")
+            }
+
+            const result = await prisma.$transaction(async (tx) => {
+                const updatedReport = await tx.report.update({
+                    where: { id: report.id },
+                    data: { status: newStatus }
+                })
+
+                const history = await tx.reportStatusHistory.create({
                     data: {
-                        reportId: id,
+                        reportId: report.id,
                         oldStatus: oldStatus,
-                        newStatus: data.status,
+                        newStatus: newStatus,
                         changedById: userId
                     }
-                })
-            ])
+            })
 
-            return {
-                report,
-                history
-            }
+            return { updatedReport, history }
+        })
+
+            return result
         } catch (error) {
             console.error("Error creating report:", error)
             throw error
