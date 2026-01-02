@@ -228,7 +228,7 @@ export class AnalyticsService{
                 if(endDate) where.createdAt.gte = new Date(endDate)
             }
 
-            const completedReports = await prisma.report.fidnMany({
+            const completedReports = await prisma.report.findMany({
                 where,
                 select: {
                     id: true,

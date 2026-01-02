@@ -8,29 +8,17 @@ const analyticsRouter = Router()
 
 analyticsRouter.get('/report-by-status', limiter, verifyToken, authorization('ADMIN'), AnalyticsController.getReportsByStatus)
 
-analyticsRouter.get('/report-by-category', AnalyticsController.getReportsByCategory)
+analyticsRouter.get('/report-by-category', limiter, verifyToken, authorization('ADMIN'), AnalyticsController.getReportsByCategory)
 
-analyticsRouter.get('/report-over-time', AnalyticsController.getReportsOverTime)
+analyticsRouter.get('/report-over-time', limiter, verifyToken, authorization('ADMIN'), AnalyticsController.getReportsOverTime)
 
-analyticsRouter.get('/report-heat-map', AnalyticsController.getReportHeatMap)
+analyticsRouter.get('/report-heat-map', limiter, verifyToken, authorization('ADMIN'), AnalyticsController.getReportHeatMap)
 
-analyticsRouter.get('/reports-over-time', AnalyticsController.getReportResolutionTime)
+analyticsRouter.get('/average-resolution-time', limiter, verifyToken, authorization('ADMIN'), AnalyticsController.getReportResolutionTime)
 
 /*
-GET /api/analytics/reports-over-time - Serie temporal de creación
-GET /api/analytics/heatmap - Coordenadas para mapa de calor
-
-
-📝 Endpoints para gráficas basadas en ReportStatusHistory:
-
-GET /api/analytics/average-resolution-time - Tiempo promedio de resolución
 GET /api/analytics/time-per-status - Tiempo promedio en cada estado
-GET /api/analytics/technician-performance - Reportes atendidos por técnico
 GET /api/analytics/status-transitions - Análisis de transiciones (cancelaciones, etc.)
-
-2025-05-25 17:43:10.924
-
-2025-03-16 13:01:22.167
 */
 
 export default analyticsRouter
