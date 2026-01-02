@@ -13,8 +13,8 @@ POST http://localhost:3000/api/v1/auth/login
 Content-Type: application/json
 
 {
-    "email": "user10@test.com",
-    "password": "password123"
+    "email": "brauliochaveza@gmail.com",
+    "password": "123456"
 }
 
 ###
@@ -123,3 +123,10 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImM5ZDY1YzhmL
 {
     "role": "ADMIN"
 }
+
+### 
+GET http://localhost:3000/api/v1/analytics/report-by-status
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImM5ZDY1YzhmLWMxODEtNDYzYi05YTg1LTU1YWFiOTFkMzJmMyIsInJvbGUiOiJBRE1JTiIsImNhblJlcG9ydCI6dHJ1ZSwiaWF0IjoxNzY3MzEyMTU2LCJleHAiOjE3NjczOTg1NTZ9.CEkpIYg2BjfGWOu78N__trHf_5KESdg7xcSk89ycbSM
+
+###
+GET http://localhost:3000/api/v1/analytics/reports-by-category

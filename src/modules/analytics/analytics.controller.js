@@ -1,11 +1,20 @@
-import { AnalyticsService } from "./analytics.service";
+import { AnalyticsService } from "./analytics.service.js";
 
 export class AnalyticsController{
     static async getReportsByStatus(req, res){
         try {
-            
+            const {startDate, endDate} = req.query
+
+            const result = await AnalyticsService.getReportsByStatus({
+                startDate, endDate
+            })
+
+            return res.status(200).json({
+                message: "Datos obtenidos correctamente",
+                ...result
+            })
         } catch (error) {
-            
+            return res.status(400).json({message: error.message})
         }
     }
 
