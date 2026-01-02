@@ -8,9 +8,13 @@ const analyticsRouter = Router()
 
 analyticsRouter.get('/report-by-status', limiter, verifyToken, authorization('ADMIN'), AnalyticsController.getReportsByStatus)
 
-/* 
-GET /api/analytics/reports-by-status - Cuenta por estado
-GET /api/analytics/reports-by-category - Cuenta por categoría
+analyticsRouter.get('/report-by-category', AnalyticsController.getReportsByCategory)
+
+analyticsRouter.get('/report-over-time', AnalyticsController.getReportsOverTime)
+
+analyticsRouter.get('/report-heat-map', AnalyticsController.getReportHeatMap)
+
+/*
 GET /api/analytics/reports-over-time - Serie temporal de creación
 GET /api/analytics/heatmap - Coordenadas para mapa de calor
 

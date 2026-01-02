@@ -125,8 +125,14 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImM5ZDY1YzhmL
 }
 
 ### 
-GET http://localhost:3000/api/v1/analytics/report-by-status
+GET http://localhost:3000/api/v1/analytics/report-by-status?startDate=2025-06-01&endDate=2025-06-07
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImM5ZDY1YzhmLWMxODEtNDYzYi05YTg1LTU1YWFiOTFkMzJmMyIsInJvbGUiOiJBRE1JTiIsImNhblJlcG9ydCI6dHJ1ZSwiaWF0IjoxNzY3MzEyMTU2LCJleHAiOjE3NjczOTg1NTZ9.CEkpIYg2BjfGWOu78N__trHf_5KESdg7xcSk89ycbSM
 
 ###
-GET http://localhost:3000/api/v1/analytics/reports-by-category
+GET http://localhost:3000/api/v1/analytics/report-by-category
+
+###
+GET http://localhost:3000/api/v1/analytics/report-over-time?period=month
+
+###
+GET http://localhost:3000/api/v1/analytics/report-heat-map
