@@ -1,3 +1,4 @@
+import { ca } from "zod/locales";
 import prisma from "../../db/client.js";
 import { getWeekNumber } from "../../util/date.js";
 
@@ -214,11 +215,75 @@ export class AnalyticsService{
         }
     }
 
-    static async getReportResolutionTime({}){
+    static async getReportResolutionTime({startDate, endDate} = {}){
         try {
-            
+            const where = {
+                status: 'COMPLETED',
+                isDeleted: false
+            }
+
+            if(startDate || endDate){
+                where.createdAt = {}
+                if(startDate) where.createdAt.gte = new Date(startDate)
+                if(endDate) where.createdAt.gte = new Date(endDate)
+            }
+
+            const completedReports = await prisma.report.fidnMany({
+                where,
+                select: {
+                    id: true,
+                    category: true,
+                    createdAt: true,
+                    history: {
+                        where: {
+                            newStatus: 'COMPLETED'
+                        },
+                        orderBy: {
+                            changedAt: 'asc'
+                        },
+                        take: 1
+                    }
+                }
+            })
+
+
+            const byCategory = {}
+
+            completedReports.forEach(report => {
+                if(report.history.length === 0) return
+
+                const category = report.category
+                const createdAt = new Date(report.createdAt)
+                const completedAt = new Date(report.history[0].changedAt)
+                const timeInHours = (completedAt - createdAt) / (1000 * 60 * 60)
+
+                if(!byCategory[category]){
+                    byCategory[category] = {
+                        totalTime: 0,
+                        count: 0
+                    }
+                }
+
+                byCategory[category].totalTime += timeInHours
+                byCategory[category].count++
+            })
+
+            const data = {}
+
+            Object.keys(byCategory).forEach(category => {
+                const avg = byCategory[category].totalTime / byCategory[category].count
+
+                data[category] = {
+                    averageTimeInHours: Math.round(avg * 100) / 100,
+                    averageTimeInDays: Math.round((avg / 24) * 100) / 100,
+                    totalReports: byCategory[category].count
+                }
+            })
+
+            return {data}
         } catch (error) {
-            
+            console.error("Error getting average resolution time by category:", error)
+            throw error
         }
     }
 

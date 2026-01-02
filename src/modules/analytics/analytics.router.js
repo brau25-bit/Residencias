@@ -14,6 +14,8 @@ analyticsRouter.get('/report-over-time', AnalyticsController.getReportsOverTime)
 
 analyticsRouter.get('/report-heat-map', AnalyticsController.getReportHeatMap)
 
+analyticsRouter.get('/reports-over-time', AnalyticsController.getReportResolutionTime)
+
 /*
 GET /api/analytics/reports-over-time - Serie temporal de creación
 GET /api/analytics/heatmap - Coordenadas para mapa de calor

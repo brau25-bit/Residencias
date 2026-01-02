@@ -110,7 +110,16 @@ export class AnalyticsController{
 
     static async getReportResolutionTime(req, res){
         try {
-            
+            const {startDate, endDate} = req.query
+
+            const result = await AnalyticsService.getReportResolutionTime({
+                startDate, endDate
+            })
+
+            return res.status(200).json({
+                message: 'Tiempo promedio de resolución obtenido exitosamente',
+                ...result
+            })
         } catch (error) {
             
         }
