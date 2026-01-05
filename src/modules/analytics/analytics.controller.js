@@ -127,17 +127,79 @@ export class AnalyticsController{
 
     static async getTimeByStatus(req, res){
         try {
-            
+            const {category, startDate, endDate} = req.query
+
+            if (category) {
+                const validCategories = [
+                    'ROAD_ISSUE',
+                    'GRAFFITI',
+                    'ILLEGAL_DUMPING',
+                    'STREET_LIGHT_ISSUE',
+                    'OTHER'
+                ]
+                if (!validCategories.includes(category)) {
+                    return res.status(400).json({
+                        message: 'Categoría inválida'
+                    })
+                }
+            }
+
+            const result = await AnalyticsService.getTimeByStatus({
+                category, startDate, endDate
+            })
+
+            return res.status(200).json({
+                message: "Tiempo promedio por estado obtenido exitosamente",
+                ...result
+            })
         } catch (error) {
-            
+            console.error("Error in getTimePerStatus controller:", error)
+            return res.status(500).json({
+                message: 'Error al obtener tiempo promedio por estado'
+            })
         }
     }
-
-    static async getReportStatusTransition(req, res){
+    
+    static async getStatusTransitions(req, res) {
         try {
-            
+            const { startDate, endDate } = req.query
+
+            const result = await AnalyticsService.getStatusTransitions({
+                startDate,
+                endDate
+            })
+
+            return res.status(200).json({
+                message: 'Análisis de transiciones obtenido exitosamente',
+                ...result
+            })
         } catch (error) {
+            console.error("Error in getStatusTransitions controller:", error)
+            return res.status(500).json({
+                message: 'Error al obtener análisis de transiciones'
+            })
+        }
+    }
+    
+    static async generateFullReportPDF(req, res) {
+        try {
+            const { startDate, endDate } = req.query
+
+            const pdfBuffer = await AnalyticsService.generateFullReportPDF({
+                startDate,
+                endDate
+            })
+
+            // Configurar headers para descarga
+            res.setHeader('Content-Type', 'application/pdf')
+            res.setHeader('Content-Disposition', `attachment; filename=reporte-analytics-${new Date().toISOString().split('T')[0]}.pdf`)
             
+            return res.send(pdfBuffer)
+        } catch (error) {
+            console.error("Error in generateFullReportPDF controller:", error)
+            return res.status(500).json({
+                message: 'Error al generar el reporte PDF'
+            })
         }
     }
 }

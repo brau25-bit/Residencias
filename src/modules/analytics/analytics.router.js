@@ -16,9 +16,10 @@ analyticsRouter.get('/report-heat-map', limiter, verifyToken, authorization('ADM
 
 analyticsRouter.get('/average-resolution-time', limiter, verifyToken, authorization('ADMIN'), AnalyticsController.getReportResolutionTime)
 
-/*
-GET /api/analytics/time-per-status - Tiempo promedio en cada estado
-GET /api/analytics/status-transitions - Análisis de transiciones (cancelaciones, etc.)
-*/
+analyticsRouter.get('/time-per-status', AnalyticsController.getTimeByStatus)
+
+analyticsRouter.get('/status-transitions', AnalyticsController.getStatusTransitions)
+
+analyticsRouter.get('/generate-report-pdf', AnalyticsController.generateFullReportPDF)
 
 export default analyticsRouter

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Reporte de Analytics</title>
+  <style>
+    {{STYLES}}
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <h1>Reporte de Análisis de Reportes Ciudadanos</h1>
+    <p class="date">
+      Fecha de generación: {{DATE}} <br>
+      Zona analizada: Alcaldía Tláhuac
+    </p>
+  </div>
+
+  <!-- RESUMEN -->
+  <div class="section">
+    <h2>Resumen Ejecutivo</h2>
+    <div class="summary-box">
+      <div class="summary-item">
+        <span class="label">Total de Reportes</span>
+        <span class="value">{{TOTAL_REPORTS}}</span>
+      </div>
+      <div class="summary-item">
+        <span class="label">Reportes Completados</span>
+        <span class="value">{{TOTAL_COMPLETED}}</span>
+      </div>
+      <div class="summary-item">
+        <span class="label">Tiempo Promedio</span>
+        <span class="value">{{AVG_DAYS}} días</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ESTADOS -->
+  <div class="section">
+    <h2>1. Distribución por Estado</h2>
+    <div class="chart-container">
+      <img src="{{CHART_REPORTS_BY_STATUS}}">
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Estado</th>
+          <th>Cantidad</th>
+          <th>Porcentaje</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{STATUS_ROWS}}
+      </tbody>
+    </table>
+  </div>
+
+  <!-- CATEGORÍAS -->
+  <div class="section page-break">
+    <h2>2. Distribución por Categoría</h2>
+    <div class="chart-container">
+      <img src="{{CHART_REPORTS_BY_CATEGORY}}">
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Categoría</th>
+          <th>Cantidad</th>
+          <th>Porcentaje</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{CATEGORY_ROWS}}
+      </tbody>
+    </table>
+  </div>
+
+  <!-- TIEMPO -->
+  <div class="section">
+    <h2>3. Reportes a lo largo del tiempo</h2>
+    <div class="chart-container">
+      <img src="{{CHART_REPORTS_OVER_TIME}}">
+    </div>
+  </div>
+
+  <!-- TIEMPO POR ESTADO -->
+  <div class="section page-break">
+    <h2>4. Tiempo promedio por estado</h2>
+    <div class="chart-container">
+      <img src="{{CHART_TIME_PER_STATUS}}">
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Estado</th>
+          <th>Horas</th>
+          <th>Días</th>
+          <th>Reportes</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{TIME_PER_STATUS_ROWS}}
+      </tbody>
+    </table>
+  </div>
+
+  <!-- TRANSICIONES -->
+  <div class="section">
+    <h2>5. Análisis de Transiciones</h2>
+
+    <div class="metrics">
+      <div class="metric-box success">
+        <h3>{{COMPLETION_RATE}}%</h3>
+        <p>Tasa de completación</p>
+      </div>
+      <div class="metric-box warning">
+        <h3>{{CANCELLATION_RATE}}%</h3>
+        <p>Tasa de cancelación</p>
+      </div>
+    </div>
+
+    <div class="chart-container">
+      <img src="{{CHART_TRANSITIONS}}">
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>Sistema de Reportes Ciudadanos</p>
+    <p>Documento generado automáticamente</p>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,171 @@
+/* src/modules/analytics/pdf/templates/styles.css */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    line-height: 1.6;
+    padding: 20px;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 3px solid #1e3a8a;
+}
+
+.header h1 {
+    color: #1e3a8a;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.date {
+    color: #666;
+    font-size: 14px;
+}
+
+.section {
+    margin-bottom: 30px;
+    page-break-inside: avoid;
+}
+
+.section h2 {
+    color: #1e3a8a;
+    font-size: 18px;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #e5e7eb;
+    padding-bottom: 5px;
+}
+
+.section h3 {
+    font-size: 16px;
+    margin: 15px 0 10px 0;
+    color: #374151;
+}
+
+.summary-box {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 20px;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.summary-item {
+    text-align: center;
+    margin: 10px;
+}
+
+.summary-item .label {
+    display: block;
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.summary-item .value {
+    display: block;
+    font-size: 28px;
+    font-weight: bold;
+    color: #1e3a8a;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 15px 0;
+}
+
+table thead {
+    background: #1e3a8a;
+    color: white;
+}
+
+table th,
+table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+table tbody tr:nth-child(even) {
+    background: #f9fafb;
+}
+
+.metrics {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+}
+
+.metric-box {
+    background: #f9fafb;
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    min-width: 150px;
+}
+
+.metric-box.success {
+    border-color: #10b981;
+    background: #f0fdf4;
+}
+
+.metric-box.warning {
+    border-color: #f59e0b;
+    background: #fffbeb;
+}
+
+.metric-box h3 {
+    font-size: 32px;
+    margin: 0 0 5px 0;
+    color: #1e3a8a;
+}
+
+.metric-box p {
+    font-size: 14px;
+    color: #666;
+    margin: 0;
+}
+
+.footer {
+    margin-top: 50px;
+    padding-top: 20px;
+    border-top: 2px solid #e5e7eb;
+    text-align: center;
+    font-size: 12px;
+    color: #666;
+}
+
+.footer p {
+    margin: 5px 0;
+}
+
+.chart-container {
+    text-align: center;
+    margin: 20px 0;
+    page-break-inside: avoid;
+}
+
+.chart-container img {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 10px;
+    background: white;
+}
+
+.page-break {
+    page-break-before: always;
+}

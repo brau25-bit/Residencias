@@ -1,6 +1,6 @@
-import { ca } from "zod/locales";
 import prisma from "../../db/client.js";
 import { getWeekNumber } from "../../util/date.js";
+import { calculateTransitionInsights } from "../../util/calculateTransition.js";
 
 export class AnalyticsService{
     static async getReportsByStatus({startDate, endDate} = {}){
@@ -287,19 +287,184 @@ export class AnalyticsService{
         }
     }
 
-    static async getTimeByStatus({}){
+    static async getTimeByStatus({category, startDate, endDate} = {}){
         try {
+            const where = {}
+
+            if(category) where.category = category
+
+            if(startDate || endDate){
+                where.createdAt = {}
+                if(startDate) where.createdAt.gte = new Date(startDate)
+                if(endDate) where.createdAt.lte = new Date(endDate)    
+            }
+
+            const reports = await prisma.report.findMany({
+                where,
+                select: {
+                    id: true,
+                    createdAt: true,
+                    history: {
+                        orderBy: {
+                            changedAt: 'asc'
+                        }
+                    }
+                }
+            })
+
+            const stateData = {
+                'PENDING': { totalTime: 0, count: 0 },
+                'IN_PROGRESS': { totalTime: 0, count: 0 },
+                'COMPLETED': { totalTime: 0, count: 0 },
+                'CANCELLED': { totalTime: 0, count: 0 }
+            }
+
+            reports.forEach(report => {
+                const history = report.history
+
+                if(history.length === 0) {
+                    const now = new Date()
+                    const timeInMs = now - new Date(report.createdAt)
+                    const timeInHours = timeInMs / (1000 * 60 * 60)
+                    
+                    stateData['PENDING'].totalTime += timeInHours
+                    stateData['PENDING'].count++
+                    return
+                }
+
+                const firstChange = history[0]
+                const timePending = (new Date(firstChange.changedAt) - new Date(report.createdAt)) / (1000 * 60 * 60)
+
+                stateData['PENDING'].totalTime += timePending
+                stateData['PENDING'].count++
+
+                for(let i = 0; i < history.length - 1; i++){
+                    const currentChange = history[i]
+                    const nextChange = history[i + 1]
+
+                    const state = currentChange.newStatus
+                    const timeInState = (new Date(nextChange.changedAt) - new Date(currentChange.changedAt)) / (1000 * 60 * 60)
+
+                    stateData[state].totalTime += timeInState
+                    stateData[state].count++
+                }
+
+                const lastState = history[history.length - 1].newStatus
+                stateData[lastState].count++  
+            })
+
+            const data = {}
+
+            Object.keys(stateData).forEach(state => {
+                const {totalTime, count} = stateData[state]
+
+                if(count === 0){
+                    data[state] = {
+                        averageTimeInHours: 0,
+                        averageTimeInDays: 0,
+                        totalReports: 0
+                    }
+                } else {
+                    const avgHours = totalTime / count
+                    data[state] = {
+                        averageTimeInHours: Math.round(avgHours * 100) / 100,
+                        averageTimeInDays: Math.round((avgHours / 24) * 100) / 100,
+                        totalReports: count
+                    }
+
+                    if(state === 'COMPLETED' || state === 'CANCELLED'){
+                        data[state].note = "Estado final, no hay transición"
+                    }
+                }
+            })
             
+            return data
         } catch (error) {
-            
+            console.error("Error getting time per status:", error)
+            throw error
         }
     }
 
-    static async getReportStatusTransition({}){
+    static async getStatusTransitions({ startDate, endDate } = {}) {
         try {
+            const where = {}
+
+            if (startDate || endDate) {
+                where.changedAt = {}
+                if (startDate) where.changedAt.gte = new Date(startDate)
+                if (endDate) where.changedAt.lte = new Date(endDate)
+            }
+
+            const history = await prisma.reportStatusHistory.findMany({
+                where,
+                orderBy: {
+                    changedAt: 'asc'
+                },
+                select: {
+                    reportId: true,
+                    oldStatus: true,
+                    newStatus: true,
+                    changedAt: true
+                }
+            })
+
+            const transitions = {}
             
+            history.forEach(change => {
+                const key = `${change.oldStatus} -> ${change.newStatus}`
+                transitions[key] = (transitions[key] || 0) + 1
+            })
+
+            const totalTransitions = Object.values(transitions).reduce((sum, count) => sum + count, 0)
+
+            const insights = calculateTransitionInsights(transitions, history)
+
+            return {
+                data: {
+                    transitions,
+                    totalTransitions,
+                    insights
+                }
+            }
         } catch (error) {
-            
+            console.error("Error getting status transitions:", error)
+            throw error
+        }
+    }
+
+    static async generateFullReportPDF({ startDate, endDate } = {}) {
+        try {            
+            // Obtener todos los datos necesarios
+            const reportsByStatus = await this.getReportsByStatus({ startDate, endDate })
+
+            const reportsByCategory = await this.getReportsByCategory({ startDate, endDate })
+
+            const reportsOverTime = await this.getReportsOverTime({ period: 'week', startDate, endDate })
+
+            const averageResolutionTime = await this.getReportResolutionTime({ startDate, endDate })
+
+            const timePerStatus = await this.getTimeByStatus({ startDate, endDate })
+
+            const statusTransitions = await this.getStatusTransitions({ startDate, endDate })
+
+            // Compilar todos los datos
+            const analyticsData = {
+                reportsByStatus,
+                reportsByCategory,
+                reportsOverTime,
+                averageResolutionTime,
+                timePerStatus,
+                statusTransitions
+            }
+
+            // Generar PDF
+            const { PDFGenerator } = await import('./pdf/pdfGenerator.js')
+            const pdfBuffer = await PDFGenerator.generateFullReport(analyticsData)
+
+            return pdfBuffer
+        } catch (error) {
+            console.error("Error generating full report PDF:", error)
+            throw error
         }
     }
 }
