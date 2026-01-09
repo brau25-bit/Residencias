@@ -1,4 +1,5 @@
 import z from 'zod'
+import { isWithinTlahuac } from '../util/geoValidation.js'
 
 export const reportSchema = z.object({
     title: z.string()
@@ -33,6 +34,9 @@ export const reportSchema = z.object({
         'COMPLETED', 
         'CANCELLED'
     ]),
+}).refine((data) => isWithinTlahuac(data.latitude, data.longitude), {
+    message: "Las coordenadas deben estar dentro de la Delegación Tláhuac, CDMX",
+    path: ["latitude"]
 })
 
 export const partialReportSchema = reportSchema.partial()

@@ -39,7 +39,7 @@ Content-Type: application/json
 ### ---------------------------------REPORTS ---------------------------------
 POST http://localhost:3000/api/v1/reports
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjE3NmRhMjZiLWUyZDQtNDE5ZS05ZjIzLTA3OTM3ZWI1NTM2MyIsInJvbGUiOiJVU0VSIiwiY2FuUmVwb3J0Ijp0cnVlLCJpYXQiOjE3NjcyNDAxMDMsImV4cCI6MTc2NzMyNjUwM30.F4Imt6z-7BgHgtI_PUX_bmmd5i8eSaKgLzs_rxwgSs4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImM5ZDY1YzhmLWMxODEtNDYzYi05YTg1LTU1YWFiOTFkMzJmMyIsInJvbGUiOiJBRE1JTiIsImNhblJlcG9ydCI6dHJ1ZSwiaWF0IjoxNzY3NjM2OTEyLCJleHAiOjE3Njc3MjMzMTJ9.aQcIpoxeW3coAm7uRYEbKX9bLXHgw5vOHp1lW-IWZT4
 
 {
     "title": "Reporte de problemas de basura",
@@ -51,7 +51,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjE3NmRhMjZiL
 
 ###
 GET http://localhost:3000/api/v1/reports
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjViMTRlZWU2LTdjMjYtNGVlZi1iZjNmLTlkMjIyYmQ3NDE2NiIsInJvbGUiOiJVU0VSIiwiY2FuUmVwb3J0Ijp0cnVlLCJpYXQiOjE3NjcyOTk1NTAsImV4cCI6MTc2NzM4NTk1MH0.46RD065UD2gwkQjc_T6jqc_Ol-uMav4RDliMHZS4L1k
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImM5ZDY1YzhmLWMxODEtNDYzYi05YTg1LTU1YWFiOTFkMzJmMyIsInJvbGUiOiJBRE1JTiIsImNhblJlcG9ydCI6dHJ1ZSwiaWF0IjoxNzY3NjM2OTEyLCJleHAiOjE3Njc3MjMzMTJ9.aQcIpoxeW3coAm7uRYEbKX9bLXHgw5vOHp1lW-IWZT4
 
 ###
 GET http://localhost:3000/api/v1/reports?status=COMPLETED
@@ -59,7 +59,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjViMTRlZWU2L
 
 ###
 GET http://localhost:3000/api/v1/reports/fe75c9d7-6dfa-46b9-a847-b194bd9cc1c8
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImM5ZDY1YzhmLWMxODEtNDYzYi05YTg1LTU1YWFiOTFkMzJmMyIsInJvbGUiOiJVU0VSIiwiY2FuUmVwb3J0Ijp0cnVlLCJpYXQiOjE3NjcyMjA4MDQsImV4cCI6MTc2NzMwNzIwNH0.8AB4NhXLa1hvecT4BAFQMC7KZpo5FLx1H4E_tX7t8j8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImM5ZDY1YzhmLWMxODEtNDYzYi05YTg1LTU1YWFiOTFkMzJmMyIsInJvbGUiOiJBRE1JTiIsImNhblJlcG9ydCI6dHJ1ZSwiaWF0IjoxNzY3NjM2OTEyLCJleHAiOjE3Njc3MjMzMTJ9.aQcIpoxeW3coAm7uRYEbKX9bLXHgw5vOHp1lW-IWZT4
 
 ###
 PATCH http://localhost:3000/api/v1/reports/8bdfac63-fed9-417e-bc1f-fc16e126d71f

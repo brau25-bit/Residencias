@@ -1,5 +1,6 @@
 import prisma from '../src/db/client.js'
 import bcrypt from 'bcrypt'
+import { getRandomCoordinatesInTlahuac } from '../src/util/geoValidation.js'
 
 // ------------------ HELPERS ------------------
 const randomFrom = (arr) => arr[Math.floor(Math.random() * arr.length)]
@@ -20,10 +21,6 @@ const categories = [
 ]
 
 const statuses = ['PENDING', 'IN_PROGRESS', 'COMPLETED', 'CANCELLED']
-
-// Coordenadas realistas (CDMX zona centro)
-const baseLat = 19.4326
-const baseLng = -99.1332
 
 // ------------------ SEED ------------------
 async function main() {
@@ -84,23 +81,26 @@ async function main() {
   }
   console.log(`✅ ${users.length} usuarios creados`)
 
-  // 📝 REPORTS CON HISTORIAL
+  // 📝 REPORTS CON COORDENADAS VÁLIDAS DE TLÁHUAC
   const startDate = new Date('2025-01-01')
   const endDate = new Date()
 
   for (let i = 0; i < 120; i++) {
     const user = randomFrom(users)
     const createdAt = randomDateBetween(startDate, endDate)
+    
+    // ⭐ Generar coordenadas aleatorias dentro de Tláhuac
+    const { latitude, longitude } = getRandomCoordinatesInTlahuac()
 
     // Crear reporte inicial (siempre PENDING)
     const report = await prisma.report.create({
       data: {
         title: `Reporte ${i + 1}`,
-        description: `Descripción detallada del reporte ${i + 1} para pruebas de analytics`,
+        description: `Descripción detallada del reporte ${i + 1} para pruebas de analytics. Ubicación dentro de la Delegación Tláhuac.`,
         category: randomFrom(categories),
         status: 'PENDING',
-        latitude: baseLat + (Math.random() - 0.5) * 0.1,
-        longitude: baseLng + (Math.random() - 0.5) * 0.1,
+        latitude: latitude,      // ⭐ Coordenadas válidas
+        longitude: longitude,    // ⭐ Coordenadas válidas
         userId: user.id,
         createdAt,
         updatedAt: createdAt
@@ -190,9 +190,13 @@ async function main() {
   console.log(`- 3 Técnicos`)
   console.log(`- 10 Usuarios`)
   console.log(`- 120 Reportes con historial`)
+  console.log(`- Todos los reportes con coordenadas válidas dentro de Tláhuac`)
   console.log('\n🔐 Credenciales de prueba:')
   console.log(`Email: admin@test.com / user1@test.com / tech1@test.com`)
   console.log(`Password: password123`)
+  console.log('\n📍 Área de cobertura:')
+  console.log(`Latitud: 19°12'38.16" N a 19°19'37.56" N`)
+  console.log(`Longitud: 99°04'08.40" W a 98°56'25.08" W`)
 }
 
 main()

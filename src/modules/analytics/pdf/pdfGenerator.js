@@ -341,7 +341,7 @@ export class PDFGenerator {
         )
         html = html.replace(
             '{{AVG_DAYS}}',
-            data.averageResolutionTime.data.global.averageTimeInDays ?? 0
+            data.averageResolutionTime.data.averageTimeInDays ?? 0
         )
 
         // CHARTS
