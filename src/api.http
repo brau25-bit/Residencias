@@ -2,7 +2,7 @@ POST http://localhost:3000/api/v1/auth/register
 Content-Type: application/json
 
 {
-    "email": "brauliochavez2509@gmail.com",
+    "email": "brauliochaveza@gmail.com",
     "password": "123456",
     "name": "braulio",
     "lastname": "chavez"
@@ -90,7 +90,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImM5ZDY1YzhmL
 GET http://localhost:3000/api/v1/reports/c4169300-5d08-40c5-be45-f853d70c6667/history
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImM5ZDY1YzhmLWMxODEtNDYzYi05YTg1LTU1YWFiOTFkMzJmMyIsInJvbGUiOiJBRE1JTiIsImNhblJlcG9ydCI6dHJ1ZSwiaWF0IjoxNzY3MjQwMzA3LCJleHAiOjE3NjczMjY3MDd9.YBCNKrVifz_n1KESFKbY3guQP6CbjeoibJnn0KPwDWU 
 
-###
+###-----------------------------USERS-----------------------------------------
 GET http://localhost:3000/api/v1/users?isActive=true&role=USER
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImM5ZDY1YzhmLWMxODEtNDYzYi05YTg1LTU1YWFiOTFkMzJmMyIsInJvbGUiOiJBRE1JTiIsImNhblJlcG9ydCI6dHJ1ZSwiaWF0IjoxNzY3MjQwMzA3LCJleHAiOjE3NjczMjY3MDd9.YBCNKrVifz_n1KESFKbY3guQP6CbjeoibJnn0KPwDWU
 
@@ -124,7 +124,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImM5ZDY1YzhmL
     "role": "ADMIN"
 }
 
-### 
+###------------------------------ANALYTICS---------------------------------
 GET http://localhost:3000/api/v1/analytics/report-by-status?startDate=2025-06-01&endDate=2025-06-07
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImM5ZDY1YzhmLWMxODEtNDYzYi05YTg1LTU1YWFiOTFkMzJmMyIsInJvbGUiOiJBRE1JTiIsImNhblJlcG9ydCI6dHJ1ZSwiaWF0IjoxNzY3NjM2OTEyLCJleHAiOjE3Njc3MjMzMTJ9.aQcIpoxeW3coAm7uRYEbKX9bLXHgw5vOHp1lW-IWZT48
 
@@ -146,9 +146,12 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImM5ZDY1YzhmL
 
 ###
 GET http://localhost:3000/api/v1/analytics/time-per-status
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImM5ZDY1YzhmLWMxODEtNDYzYi05YTg1LTU1YWFiOTFkMzJmMyIsInJvbGUiOiJBRE1JTiIsImNhblJlcG9ydCI6dHJ1ZSwiaWF0IjoxNzY3NjM2OTEyLCJleHAiOjE3Njc3MjMzMTJ9.aQcIpoxeW3coAm7uRYEbKX9bLXHgw5vOHp1lW-IWZT4
 
 ###
 GET http://localhost:3000/api/v1/analytics/status-transitions
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImM5ZDY1YzhmLWMxODEtNDYzYi05YTg1LTU1YWFiOTFkMzJmMyIsInJvbGUiOiJBRE1JTiIsImNhblJlcG9ydCI6dHJ1ZSwiaWF0IjoxNzY3NjM2OTEyLCJleHAiOjE3Njc3MjMzMTJ9.aQcIpoxeW3coAm7uRYEbKX9bLXHgw5vOHp1lW-IWZT4
 
 ###
 GET http://localhost:3000/api/v1/analytics/generate-report-pdf
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImM5ZDY1YzhmLWMxODEtNDYzYi05YTg1LTU1YWFiOTFkMzJmMyIsInJvbGUiOiJBRE1JTiIsImNhblJlcG9ydCI6dHJ1ZSwiaWF0IjoxNzY3NjM2OTEyLCJleHAiOjE3Njc3MjMzMTJ9.aQcIpoxeW3coAm7uRYEbKX9bLXHgw5vOHp1lW-IWZT4

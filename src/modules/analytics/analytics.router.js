@@ -16,10 +16,10 @@ analyticsRouter.get('/report-heat-map', limiter, verifyToken, authorization('ADM
 
 analyticsRouter.get('/average-resolution-time', limiter, verifyToken, authorization('ADMIN'), AnalyticsController.getReportResolutionTime)
 
-analyticsRouter.get('/time-per-status', AnalyticsController.getTimeByStatus)
+analyticsRouter.get('/time-per-status', limiter, verifyToken, authorization('ADMIN'), AnalyticsController.getTimeByStatus)
 
-analyticsRouter.get('/status-transitions', AnalyticsController.getStatusTransitions)
+analyticsRouter.get('/status-transitions', limiter, verifyToken, authorization('ADMIN'), AnalyticsController.getStatusTransitions)
 
-analyticsRouter.get('/generate-report-pdf', AnalyticsController.generateFullReportPDF)
+analyticsRouter.get('/generate-report-pdf', limiter, verifyToken, authorization('ADMIN'), AnalyticsController.generateFullReportPDF)
 
 export default analyticsRouter
