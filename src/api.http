@@ -39,7 +39,7 @@ Content-Type: application/json
 ### ---------------------------------REPORTS ---------------------------------
 POST http://localhost:3000/api/v1/reports
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImM5ZDY1YzhmLWMxODEtNDYzYi05YTg1LTU1YWFiOTFkMzJmMyIsInJvbGUiOiJBRE1JTiIsImNhblJlcG9ydCI6dHJ1ZSwiaWF0IjoxNzY3NjM2OTEyLCJleHAiOjE3Njc3MjMzMTJ9.aQcIpoxeW3coAm7uRYEbKX9bLXHgw5vOHp1lW-IWZT4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEzNTk1NzVjLTY2YmQtNDY5Ny05YjIzLTkwNzBlMjJkOGI3ZCIsInJvbGUiOiJBRE1JTiIsImNhblJlcG9ydCI6dHJ1ZSwiaWF0IjoxNzY4MjQxNTc5LCJleHAiOjE3NjgzMjc5Nzl9.uf9tSua7UEeBYEjL8sRIdsOG317dl5lizbucC1E-MsE
 
 {
     "title": "Reporte de problemas de basura",
@@ -50,12 +50,12 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImM5ZDY1YzhmL
 }
 
 ###
-GET http://localhost:3000/api/v1/reports
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImM5ZDY1YzhmLWMxODEtNDYzYi05YTg1LTU1YWFiOTFkMzJmMyIsInJvbGUiOiJBRE1JTiIsImNhblJlcG9ydCI6dHJ1ZSwiaWF0IjoxNzY3NjM2OTEyLCJleHAiOjE3Njc3MjMzMTJ9.aQcIpoxeW3coAm7uRYEbKX9bLXHgw5vOHp1lW-IWZT4
+GET http://localhost:3000/api/v1/reports?page=12
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEzNTk1NzVjLTY2YmQtNDY5Ny05YjIzLTkwNzBlMjJkOGI3ZCIsInJvbGUiOiJBRE1JTiIsImNhblJlcG9ydCI6dHJ1ZSwiaWF0IjoxNzY4MjQxODMwLCJleHAiOjE3NjgzMjgyMzB9.KcSElrrq1UQusCjyerP7A8zRwaz7hV80pIYwyzJrUaY
 
 ###
 GET http://localhost:3000/api/v1/reports?status=COMPLETED
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjViMTRlZWU2LTdjMjYtNGVlZi1iZjNmLTlkMjIyYmQ3NDE2NiIsInJvbGUiOiJVU0VSIiwiY2FuUmVwb3J0Ijp0cnVlLCJpYXQiOjE3NjcyOTk1NTAsImV4cCI6MTc2NzM4NTk1MH0.46RD065UD2gwkQjc_T6jqc_Ol-uMav4RDliMHZS4L1k
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEzNTk1NzVjLTY2YmQtNDY5Ny05YjIzLTkwNzBlMjJkOGI3ZCIsInJvbGUiOiJBRE1JTiIsImNhblJlcG9ydCI6dHJ1ZSwiaWF0IjoxNzY4MjQxODMwLCJleHAiOjE3NjgzMjgyMzB9.KcSElrrq1UQusCjyerP7A8zRwaz7hV80pIYwyzJrUaY
 
 ###
 GET http://localhost:3000/api/v1/reports/fe75c9d7-6dfa-46b9-a847-b194bd9cc1c8
@@ -92,7 +92,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImM5ZDY1YzhmL
 
 ###-----------------------------USERS-----------------------------------------
 GET http://localhost:3000/api/v1/users?isActive=true&role=USER
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImM5ZDY1YzhmLWMxODEtNDYzYi05YTg1LTU1YWFiOTFkMzJmMyIsInJvbGUiOiJBRE1JTiIsImNhblJlcG9ydCI6dHJ1ZSwiaWF0IjoxNzY3MjQwMzA3LCJleHAiOjE3NjczMjY3MDd9.YBCNKrVifz_n1KESFKbY3guQP6CbjeoibJnn0KPwDWU
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEzNTk1NzVjLTY2YmQtNDY5Ny05YjIzLTkwNzBlMjJkOGI3ZCIsInJvbGUiOiJBRE1JTiIsImNhblJlcG9ydCI6dHJ1ZSwiaWF0IjoxNzY4MjQxODMwLCJleHAiOjE3NjgzMjgyMzB9.KcSElrrq1UQusCjyerP7A8zRwaz7hV80pIYwyzJrUaY
 
 ###
 GET http://localhost:3000/api/v1/users/e1ec5b4c-f011-4aad-81f5-0347e9d745e8
@@ -125,8 +125,8 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImM5ZDY1YzhmL
 }
 
 ###------------------------------ANALYTICS---------------------------------
-GET http://localhost:3000/api/v1/analytics/report-by-status?startDate=2025-06-01&endDate=2025-06-07
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImM5ZDY1YzhmLWMxODEtNDYzYi05YTg1LTU1YWFiOTFkMzJmMyIsInJvbGUiOiJBRE1JTiIsImNhblJlcG9ydCI6dHJ1ZSwiaWF0IjoxNzY3NjM2OTEyLCJleHAiOjE3Njc3MjMzMTJ9.aQcIpoxeW3coAm7uRYEbKX9bLXHgw5vOHp1lW-IWZT48
+GET http://localhost:3000/api/v1/analytics/report-by-status
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEzNTk1NzVjLTY2YmQtNDY5Ny05YjIzLTkwNzBlMjJkOGI3ZCIsInJvbGUiOiJBRE1JTiIsImNhblJlcG9ydCI6dHJ1ZSwiaWF0IjoxNzY4MjQxODMwLCJleHAiOjE3NjgzMjgyMzB9.KcSElrrq1UQusCjyerP7A8zRwaz7hV80pIYwyzJrUaY
 
 ###
 GET http://localhost:3000/api/v1/analytics/report-by-category?startDate=2025-06-01&endDate=2025-06-07

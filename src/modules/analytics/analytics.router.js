@@ -20,6 +20,6 @@ analyticsRouter.get('/time-per-status', limiter, verifyToken, authorization('ADM
 
 analyticsRouter.get('/status-transitions', limiter, verifyToken, authorization('ADMIN'), AnalyticsController.getStatusTransitions)
 
-analyticsRouter.get('/generate-report-pdf', limiter, verifyToken, authorization('ADMIN'), AnalyticsController.generateFullReportPDF)
+analyticsRouter.get('/generate-report-pdf', AnalyticsController.generateFullReportPDF)
 
 export default analyticsRouter
